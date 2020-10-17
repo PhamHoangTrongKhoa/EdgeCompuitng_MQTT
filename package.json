@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/PhamHoangTrongKhoa/EdgeCompuitng_MQTT#readme",
   "dependencies": {
+    "excel4node": "^1.7.2",
     "mosca": "^2.8.3",
     "mqtt": "^4.2.1"
   }
