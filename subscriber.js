@@ -1,12 +1,13 @@
 var mqtt = require('mqtt');
 var settings = {
     mqttServerUrl : "192.168.137.105",
-    port : 18833,
     topic : "AAA"
 }
 
-var p = require('./process');
-
+var process_file = require('./process_file');
+// var process = require('./process');
+// var sharedArray = process.sharedArray;
+var sharedArray;
 
 var client = mqtt.connect('mqtt://' + settings.mqttServerUrl);
 
@@ -17,5 +18,8 @@ client.on('connect', function(){
 
 client.on('message', function(topic, message){
     console.log(message.toString());
-    console.log(p.disassemble(message));
+    sharedArray = process_file.disassemble(message);
+    console.log(sharedArray);
 })
+
+

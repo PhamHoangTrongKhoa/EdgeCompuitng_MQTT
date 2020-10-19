@@ -1,20 +1,16 @@
-function disassemble (message) {
-    console.log(message);
-    var arr = String(message).split(':');
-    var arr_where = arr[0].split('/');
-    arr.splice(0,1,arr_where[0]);// xoa phan tu 0 va chen vao vi tri 0
-    arr.splice(1,0,arr_where[1]);// chen vao vi tri 1 va day ptu sau xuong'
-    return arr;
-}
+var sharedArray = [];
+module.exports = sharedArray;
 
-exports.disassemble = function(message){
-    return disassemble(message);
-}
+var fs = require('fs');
 
-// test module function disassemble
-function test_disassemble(){
-    var message = "home01/room01:27:69";
-    var arr = disassemble(message);
-    console.log(arr);
-}
-test_disassemble();
+
+var room1 = require('./room_object');
+var room2 = require('./room_object');
+// console.log(room);
+// var r1 = new room();
+var arr = ['home01', 'room01', '27', '68'];
+var arr2 = ['home01', 'room02', '27', '68'];
+room1.addRoom(arr);
+room2.addRoom(arr2);
+room1.print();
+room2.print();

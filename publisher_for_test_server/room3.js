@@ -6,7 +6,7 @@ var settings = {
     home : "home01",
     room : "room03",
     nhiet_do : "27",
-    do_am : "70"
+    do_am : "73"
 }
 
 var client = mqtt.connect('mqtt://' + settings.mqttServerUrl);
