@@ -1,12 +1,14 @@
-var fs = require('fs');
+const fs = require('fs');
 
-var process_file = require('../process_file');
-const { addRoom } = require('../room_object');
+const process_file = require('../process_file');
+const Room= require('../room_object');
+
 var arr = process_file.disassemble("home01/room01:27:69");
+var room1 = new Room().update_data(arr);
 
-var room = require('../room_object.js');
-room.addRoom(arr);
 
-var data = JSON.stringify(room);
-
+var data = JSON.stringify(room1);
 fs.writeFileSync('../data_room/room01.json', data);
+
+// var express = require('express');
+// console.log(express);
