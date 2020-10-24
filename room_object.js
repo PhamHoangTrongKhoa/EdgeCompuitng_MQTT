@@ -6,11 +6,11 @@ class Room{
         this.do_am = '';
     }
 
-    static setting_home(home){
+    setting_home = function(home){
         this.home = home;
     }
 
-    static setting_room(room){
+    setting_room = function(room){
         this.room = room;
     }
 

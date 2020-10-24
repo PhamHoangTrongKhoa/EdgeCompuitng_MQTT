@@ -15,11 +15,12 @@ client.on('connect', function(){
     client.subscribe(settings.topic)
     console.log("Subscribed topic " + settings.topic);
 })
-
+console.log('aaaaaaaaaaa');
 client.on('message', function(topic, message){
     console.log(message.toString());
     sharedArray = process_file.disassemble(message);
     console.log(sharedArray);
 })
+console.log('hhhhhhhhhhhhhhhh');
 
 

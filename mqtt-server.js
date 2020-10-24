@@ -1,20 +1,7 @@
-var mosca = require('mosca');
-// console.log(mosca);
+var mqtt = require('mqtt');
 var settings = {
-        port : 18833
+    mqttServerUrl : "192.168.137.105",
+    topic : "AAA"
 }
 
-var server = new mosca.Server(settings);
-
-server.on('clientConnected', function(client){
-    console.log('Client connected', client.id)
-});
-server.on('published', function(packet, client){
-    console.log('Message Received ', packet.payload);
-});
-
-server.on('ready', setup);
-
-function setup(){
-    console.log('Mosca MQTT server is up and runing at ' + settings.port);
-}
+let subscriber = require
