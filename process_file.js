@@ -38,7 +38,7 @@ function test_disassemble(){
     console.log(arr);
 }
 
-{
+function test_checkfunction(){
     var flag ={
         flag1 : false,
         flag2 : false 
@@ -48,5 +48,14 @@ function test_disassemble(){
     console.log(flag.flag1);
     console.log(flag.flag2);
 }
+
+////////////on the orther node file:
+    // let flag = {
+    //     flag1 : false,
+    //     flag2 : false
+    // }
+    // process_file.check(sharedArray, flag);
+    // console.log(flag.flag1);
+    // console.log(flag.flag2);
 // test_disassemble();
 
