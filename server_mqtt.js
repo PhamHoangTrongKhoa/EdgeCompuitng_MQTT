@@ -30,20 +30,12 @@ client.on('message', function(topic, message){
     }
 })
 const checkdata = async() =>{
-<<<<<<< HEAD
     results = await database.mySqliteRead_RoomStatus(function(){
         console.log('===========');
         console.log(results);
     })    
 }
 checkdata();
-=======
-    results = await database.mySqliteRead_RoomStatus();
-    console.log('===========');
-    console.log(results);
-}
-
->>>>>>> f571493998951ab310dd7e428a230a4109a2ecea
 
 // setInterval( checkdata = async() => {
 //     // var results = [];

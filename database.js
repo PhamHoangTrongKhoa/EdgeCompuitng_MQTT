@@ -94,14 +94,9 @@ module.exports={
       console.log('Close the database connection.');
       console.log(results);
       // callback(results);
-<<<<<<< HEAD
       
     });
     return results;
-=======
-      return results;
-    });
->>>>>>> f571493998951ab310dd7e428a230a4109a2ecea
     // return callback(results);
     // console.log(results);
     // return results;
