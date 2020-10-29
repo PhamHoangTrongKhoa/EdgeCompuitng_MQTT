@@ -64,7 +64,7 @@ module.exports={
 
 
 
-  mySqliteRead_RoomStatus(){
+  async mySqliteRead_RoomStatus(){
     let results = [];
     let db = new sqlite3.Database('C:/sqlite/gui/test', (err) => {
       if (err) {
@@ -75,7 +75,7 @@ module.exports={
 
     var sql ='SELECT * FROM Data_room_status ORDER BY TIME DESC LIMIT 6'
     // var params =['room01', 27, 60.2]
-            db.each(sql,  function (err, result) {// chay dong thoi voi (1)
+            await db.each(sql,  function (err, result) {// chay dong thoi voi (1)
                 if (err){
                     console.error(err)
                     return;
@@ -87,16 +87,18 @@ module.exports={
             });
             // console.log("======================================================================"); // this is (1)
             // console.log(results);
-    db.close((err) => {
+    await db.close((err) => {
       if (err) {
         console.error(err.message);
       }
       console.log('Close the database connection.');
-      console.log(results);
+      // console.log(results);
       // callback(results);
-      
+      return results;
     });
-    return results;
+    // console.log("chan may qua'");
+    // console.log(results);
+    // return results;
     // return callback(results);
     // console.log(results);
     // return results;
