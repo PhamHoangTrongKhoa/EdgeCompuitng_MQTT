@@ -1,18 +1,20 @@
-function disassemble (message) {
-    // console.log(message);
+exports.checkmessage = function(arr){
+    if (arr.length == 4){
+        if (arr[1] > 0 && arr[1] < 3){
+            return arr[1];
+        } return 0;
+    }else return 0;
+}
+
+exports.disassemble = function(message){
     var arr = String(message).split('|');
-    // var arr_where = arr[0].split('/');
-    // arr.splice(0,1,arr_where[0]);// xoa phan tu 0 va chen vao vi tri 0
-    // arr.splice(1,0,arr_where[1]);// chen vao vi tri 1 va day ptu sau xuong'
     arr[0] = arr[0].replace('room', '');
     return arr;
 }
 
-function check(arr, flag){
+exports.check = function(arr, flag) {
     let nhiet = 25;
     let am = 60;
-    //doc database
-    // console.log(arr[2]);
     console.log(nhiet - parseFloat(arr[2]));
     if ((nhiet - 1 > parseFloat(arr[2])) || (nhiet + 1 < parseFloat(arr[2]))){
         flag.flag1 = true;
@@ -23,13 +25,7 @@ function check(arr, flag){
     console.log(flag.flag1);
 }
 
-exports.disassemble = function(message){
-    return disassemble(message);
-}
 
-exports.check = function(arr, flag) {
-    return check(arr,flag);
-}
 
 // test module function disassemble
 function test_disassemble(){
