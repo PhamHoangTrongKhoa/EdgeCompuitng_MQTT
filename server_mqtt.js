@@ -31,80 +31,51 @@ client.on('message', function(topic, message){
         console.log(sharedArray);
         database.mySqlite_device_status(sharedArray);
         // [ send status device changed to server ]
+
     }
 })
 
 
 setInterval( function(){
-    var results = [];
-    database.mySqliteRead_RoomStatus(function(err, results){
-        console.log(results);
+    database.mySqliteRead_RoomStatus(function(err, room_status){
         let now = Date.now();
-        console.log("time = ", Math.floor((now - time) / 1000));
-        // console.log(results);
         let flag = {
             flag1 : false,
             flag2 : false,
-            msg : null
+            msg : ''
         };
     
         if (Math.floor((now - time) / 15000) > 0){
             flag.flag2 = true;
         }
-        if (flag.flag1 == true){// [control]
-            // [send solution from msg receviced]
-            console.log(flag.msg);
-            let msg = process_file.disassemble(flag.msg);
-            if (msg.length() == 3){
-                client.publish(settings.topic, flag.msg);
+
+        database.mySqliteRead_DeviceStatus(room_status[0].room ,function(err, devices_status){
+            // console.log(devices_status);
+            process_file.checkdata(room_status, devices_status, flag);
+            // console.log(devices_status);
+            console.log('asda');
+            if (flag.flag1 == true){// [control]
+                // [send solution from msg receviced]
+                console.log(flag.msg);
+                let msg = process_file.disassemble(flag.msg);
+                if (msg.length() == 3){
+                    client.publish(settings.topic, flag.msg);
+                }
+                // send message to esp to control devices in the room had problem
+                
+                // [save status device changed to database]
+                // [send status device changed to server]
+                // [save status room changed to database]
+                // [send status room changed to server]
             }
-            // send message to esp to control devices in the room had problem
-            
-            // [save status device changed to database]
-            // [send status device changed to server]
-            // [save status room changed to database]
-            // [send status room changed to server]
-        }
-        if (flag.flag2 == true){
-            time = Date.now();
-            // console.log("");
-        }
-        if((flag.flag1 == true)||(flag.flag2 == true)){
-            // [send status room to server]
-            // [save status room sent to server into database]
-        }
+            if (flag.flag2 == true){
+                time = Date.now();
+                // console.log("");
+            }
+            if((flag.flag1 == true)||(flag.flag2 == true)){
+                // [send status room to server]
+                // [save status room sent to server into database]
+            }
+        });    
     });
-    // results = [
-    //     { room: '02', time: 1603789041073, nhiet: 27.1, am: 65 },
-    //     { room: '02', time: 1603789036143, nhiet: 27.2, am: 65 },
-    //     { room: '02', time: 1603789030950, nhiet: 27.0, am: 65 },
-    //     { room: '02', time: 1603789026005, nhiet: 27.3, am: 65 },
-    //     { room: '02', time: 1603789021111, nhiet: 27.4, am: 65 },
-    //     { room: '02', time: 1603789016183, nhiet: 27.0, am: 65 }
-    // ];
-
-    // console.log("flag = ", flag);
-    // if (flag.flag2 == true){
-    //     if (flag.flag1 == true){
-    //         //control
-    //         var msg = "";
-    //         client.publish(settings.topic, msg);
-
-    //     }
-    //     //send gia tri TB to server
-    //     // luu gia tri tren server vao database
-    //     time = Date.now();
-    //     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
-    // }else if (flag.flag1 == true){
-    //     // control
-    //     // send gia tri to server
-    //     // luu gia tri tren server vao database
-    // }
-   
-}, 1000)
-
-
-
-
-
-
+}, 5000)
