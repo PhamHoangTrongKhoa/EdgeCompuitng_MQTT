@@ -1,23 +1,23 @@
-const database = require("./database");
+// const database = require("./database/database");
 
 let database = require('./database');
 
-class process_file {
-    checkmessage = function(arr){
+module.exports = {
+    checkmessage(arr){
         if (arr.length == 4){
             if (arr[1] > 0 && arr[1] < 3){
                 return arr[1];
             } return 0;
         }else return 0;
-    }
+    },
 
-    disassemble = function(message){
+    disassemble(message){
         var arr = String(message).split('|');
         arr[0] = arr[0].replace('room', '');
         return arr;
-    }
+    },
 
-    checkdata = function(arr, flag) {
+    checkdata(arr, flag) {
         var i;
         // [get nhiet, am da gui len server tu database]
         let server = {
@@ -35,16 +35,16 @@ class process_file {
         // console.log(nhiet - parseFloat(arr[2]));
         let results = [];
         // [ results = database.mySqliteRead_DeviceStatus();]
-        let results = [
-            { room: '02', id: 'led01', name: 'may_suoi', status: 0, time: 1603789041073 },
-            { room: '02', id: 'led02', name: 'may_lanh', status: 0, time: 1603789041073 },
-            { room: '02', id: 'led03', name: 'den1', status: 0, time: 1603789041073 },
-            { room: '02', id: 'led04', name: 'den2', status: 0, time: 1603789041073 }
-        ];
+        // results = [
+        //     { room: '02', id: 'led01', name: 'may_suoi', status: 0, time: 1603789041073 },
+        //     { room: '02', id: 'led02', name: 'may_lanh', status: 0, time: 1603789041073 },
+        //     { room: '02', id: 'led03', name: 'den1', status: 0, time: 1603789041073 },
+        //     { room: '02', id: 'led04', name: 'den2', status: 0, time: 1603789041073 }
+        // ];
         if ((Math.max(nhiet) - server.nhiet > 0.5)){
-            if (){
+            // if (){
                 
-            }
+            // }https://www.sqlitetutorial.net/sqlite-update/
             flag.msg = 'room' + arr[0].room + '|led02|1';
         }
         if (server.nhiet - Math.min(nhiet) > 0.5){
@@ -59,11 +59,33 @@ class process_file {
         if (msg.length > 0) {
             flag.flag1 = true;
         }  
-    }
+    },
+
+    smooth(arr, windowSize, getter = (value) => value, setter) {
+        const get = getter
+        const result = []
+      
+        for (let i = 0; i < arr.length; i += 1) {
+          const leftOffset = i - windowSize
+          const from = leftOffset >= 0 ? leftOffset : 0
+          const to = i + windowSize + 1
+      
+          let count = 0
+          let sum = 0
+          for (let j = from; j < to && j < arr.length; j += 1) {
+            sum += get(arr[j])
+            count += 1
+          }
+      
+          result[i] = setter ? setter(arr[i], sum / count) : sum / count
+        }
+      
+        return result
+      }
 
 }
 
-module.exports = process_file;
+// module.exports = process_file;
 
 
 
