@@ -42,7 +42,8 @@ setInterval( function(){
         let flag = {
             flag1 : false,
             flag2 : false,
-            msg : ''
+            msg : '',
+            control_msg : []
         };
     
         if (Math.floor((now - time) / 15000) > 0){
@@ -53,7 +54,6 @@ setInterval( function(){
             // console.log(devices_status);
             process_file.checkdata(room_status, devices_status, flag);
             // console.log(devices_status);
-            console.log('asda');
             if (flag.flag1 == true){// [control]
                 // [send solution from msg receviced]
                 console.log(flag.msg);
