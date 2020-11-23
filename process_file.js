@@ -4,7 +4,7 @@
 
 module.exports = {
     checkmessage(arr){
-        if (arr.length == 4){
+        if ((arr.length == 3) || (arr.length == 4) || (arr.length == 6)){
             if (arr[1] > 0 && arr[1] < 3){
                 return arr[1];
             } return 0;
@@ -50,59 +50,65 @@ module.exports = {
         console.log(devices_status);
         console.log(room_status);
         
+        // nhiet = [2,3,4];
+        // console.log(nhiet);
+        // console.log(Math.max.apply(Math,nhiet));
         // check heat and humidity whith threshold of room
-        if (Math.max(nhiet) > threshold.maximum_heat){
+        if (Math.max.apply(Math, nhiet) > threshold.maximum_heat){
             for (const element in devices_status){
                 if (devices_status[element].deviceid.includes('pan')){
                     let control_msg = devices_status[element].deviceid + '|ON';//control_msg = 02pan01|ON
                     flag.control_msg.push(control_msg);
                 }
             }
-        }else if (Math.min(nhiet) > threshold.minimum_heat){
+            flag.msg.push('maxheat');
+        }else if (Math.min.apply(Math, nhiet) > threshold.minimum_heat){
             for (const element in devices_status){
                 if (devices_status[element].deviceid.includes('pan')){
                     let control_msg = devices_status[element].deviceid + '|OFF';//control_msg = 02pan01|OFF
                     flag.control_msg.push(control_msg);
                 }
             }
+            flag.msg.push('minheat');
         }
 
-        if (Math.max(am) > threshold.maximum_humidity){
+        if (Math.max.apply(Math, am) > threshold.maximum_humidity){
             for (const element in devices_status){
-                if (devices_status[element].deviceid.includes('pan')){
+                if (devices_status[element].deviceid.includes('led')){
                     let control_msg = devices_status[element].deviceid + '|ON';//control_msg = 02pan01|ON
                     flag.control_msg.push(control_msg);
                 }
-                flag.msg = 'maxheat';
             }
-        }else if (Math.min(am) > threshold.minimum_humidity){
+            flag.msg.push('maxhumidity');
+        }else if (Math.min.apply(Math, am) > threshold.minimum_humidity){
             for (const element in devices_status){
                 if (devices_status[element].deviceid.includes('pan')){
                     let control_msg = devices_status[element].deviceid + '|OFF';//control_msg = 02pan01|OFF
                     flag.control_msg.push(control_msg);
                 }
-                flag.msg = 'minheat';
             }
+            flag.msg,push('minhumidity');
         }
+
 
         // if room status is in threshold, check changes of status in room
         if (flag.msg.length == 0){
-            if ((Math.max(nhiet) - server.nhiet > 0.5)){
+            if ((Math.max.apply(Math, nhiet) - server.nhiet > 0.5)){
                 //////////////// mau :var message = 'room:01|Id:01led01|status:ON';
                 flag.msg += 'maxheat';
-            }else if (server.nhiet - Math.min(nhiet) > 0.5){
+            }else if (server.nhiet - Math.min.apply(Math, nhiet) > 0.5){
                 if (flag.msg.length > 0){
                         flag.msg += '|';
                 }
                 flag.msg += 'minheat'; 
             }
         
-            if (Math.max(am) - server.am > 5){
+            if (Math.max.apply(Math, am) - server.am > 5){
                 if (flag.msg.length > 0){
                     flag.msg += '|';
                 }
                 flag.msg += 'minhumidity'; 
-            }else if (server.am - Math.min(am) > 5){
+            }else if (server.am - Math.min.apply(Math, am) > 5){
                 if (flag.msg.length > 0){
                     flag.msg += '|';
                 }
@@ -114,9 +120,72 @@ module.exports = {
         // if ((flag.msg.length > 0)||(flag.control_msg.length > 0)){
         if (flag.msg.length > 0){
             flag.flag1 = true;
-            console.log('print flag.msg : ' + flag.msg  );
+            console.log('print flag.msg : ');
+            console.log(flag.msg);
+            if (flag.control_msg.length > 0){
+                console.log('print flag.control_msg : ');
+                console.log(flag.control_msg);
+            }
         }
         
+    },
+
+    check_changes(str, arr, oldvalue){
+        if (this.isAverageValueInscreased(arr, oldvalue) == 'Increased'){
+            if (this.isValueIncreasing(arr)){
+                return str + 'Increasing'
+            }else return str + 'Increased'
+        }else if (this.isAverageValueInscreased(arr, oldvalue) == 'Decreased'){
+            if (this.isValueDecreasing(arr)){
+                return str + 'Decreasing'
+            }else return str + 'Decreased'
+        }else if (this.isAverageValueInscreased(arr, oldvalue) == 'NoChanged'){
+            return str + 'Nochanged'
+        }
+    },
+
+    isAverageValueInscreased(arr, oldvalue){
+    // If avg Value is Bigger than oldvalue (on server) by 0.2, Func will return "Increased"
+    // Else if avg Value is smaller than oldvalue (on server) by 0.2, Func will return "Decreased"
+    // Else Func return "NoChanged"
+        let avg = 0;
+        for (let i = 0; i < arr.length; i++){
+            avg += arr[i];
+        }
+        avg = avg / arr.length;
+        if (avg > (oldvalue + 0.2)){
+            return "Increased";
+        }else if (avg < (oldvalue - 0.2)){
+            return "Decreased";
+        }else return "NoChanged"
+    },
+
+    isValueIncreasing(arr){
+    // If value is increasing, func will return true. Else func return false.
+        let inc = 0
+        arr = this.smooth(arr, 2);
+        for (let i = 1; i < arr.lenght; i++){
+            if(arr[i-1] < arr [i]){
+                inc++;
+            }
+        }
+        if (inc > (Math.floor(arr.length *2 / 3)) ){ // arr length = 5 => 3 gia tri tang dan
+            return true;
+        }else return false;
+    },
+
+    isValueDecreasing(arr){
+    // If value is decreasing, func will return true. Else func return false.
+        let inc = 0
+        arr = this.smooth(arr, 2);
+        for (let i = 1; i < arr.lenght; i++){
+            if(arr[i-1] > arr [i]){
+                inc++;
+            }
+        }
+        if (inc > (Math.floor(arr.length *2 / 3)) ){ // arr length = 5 => 3 gia tri giam dan
+            return true;
+        }else return false;
     },
 
     smooth(arr, windowSize, getter = (value) => value, setter) {

@@ -1,0 +1,16 @@
+--insert into room_status (room, time, nhiet, am) values ("01", 0, 27 , 65)
+select *from room_status
+--delete from data_room_status where time >= 0
+
+--insert into room_device_status (room, deviceid, name, status) values("01", "01led01", "led01", "ON")
+--select *from room_device_status
+/*UPDATE Room_device_status SET name = 'led01' WHERE deviceid = '02led01'*/
+--UPDATE Room_device_status SET status = 'OFF' WHERE deviceid = '02led01'
+--UPDATE Room_device_status SET deviceid = '02pan01' WHERE deviceid = '02led01'
+--delete from room_device_status where room is not null
+--delete from data where time is null
+/*CREATE TABLE table_device_status (
+	device_id INTEGER PRIMARY KEY,
+	name TEXT NOT NULL,
+	status TEXT NOT NULL
+);*/
