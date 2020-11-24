@@ -1,0 +1,26 @@
+{
+  "name": "edgecompuitng_mqtt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhamHoangTrongKhoa/EdgeCompuitng_MQTT.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PhamHoangTrongKhoa/EdgeCompuitng_MQTT/issues"
+  },
+  "homepage": "https://github.com/PhamHoangTrongKhoa/EdgeCompuitng_MQTT#readme",
+  "dependencies": {
+    "excel4node": "^1.7.2",
+    "express": "^4.17.1",
+    "mosca": "^2.8.3",
+    "mqtt": "^4.2.1",
+    "sqlite3": "^5.0.0"
+  }
+}
