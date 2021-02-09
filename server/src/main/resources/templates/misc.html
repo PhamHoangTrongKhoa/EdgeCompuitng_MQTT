@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Miscellaneous</title>
+    <link th:href="@{/vendor/bootstrap/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="content shadow ml-2">
+    <div class="row">
+        <div class="col-sm-12 col-mb-3 col-lg-3 col-xl-3 sidebar bg-info" id="sidebar">
+            <div th:include="fragment::sidebar"></div>
+        </div>
+        <div class="col-sm-12 col-mb-9 col-lg-9 col-xl-9 content" id="content">
+            <div th:include="fragment::topbar"></div>
+            <div class="main-content my-4 ml-4">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card shadow bordered">
+                            <div class="card-header text-center">
+                                <h4>Smoke Density</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="smoke-chart" height="200px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card shadow bordered">
+                            <div class="card-header text-center">
+                                <h4>Light Intensity</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="light-chart" height="200px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:include="fragment::footer"></div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery-3.4.1.js}"></script>
+<script th:src="@{/vendor/bootstrap/bootstrap.js}"></script>
+<script th:src="@{/vendor/chartjs/chart.js}"></script>
+<script th:src="@{/vendor/font-awesome/js/fontawesome.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/misc.js}"></script>
+</body>
+</html>

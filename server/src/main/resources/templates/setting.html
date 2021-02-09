@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <link th:href="@{/vendor/bootstrap/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="content shadow ml-2">
+    <div class="row">
+        <div class="col-sm-12 col-mb-3 col-lg-3 col-xl-3 sidebar bg-info" id="sidebar">
+            <div th:include="fragment::sidebar"></div>
+        </div>
+        <div class="col-sm-12 col-mb-9 col-lg-9 col-xl-9 content" id="content">
+            <div th:include="fragment::topbar"></div>
+            <div class="main-content my-4 ml-4">
+                <h3>Standard Values</h3>
+                <hr>
+                <span th:text="${rs.room.id}" id="rs_id" hidden></span>
+                <div class="mx-5">
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Temperature :</p>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control input-center" id="rs_t">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Humidity :</p>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control input-center" id="rs_h">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Smoke Density:</p>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control input-center" id="rs_s">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Light Intensity :</p>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control input-center" id="rs_l">
+                        </div>
+                    </div>
+                    <br>
+                    <button class="btn btn-primary float-right" id="send">Change</button>
+                </div>
+            </div>
+            <div th:include="fragment::footer"></div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="success-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Success</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container text-center">
+                        <i class="fas fa-info-circle fa-8x icon-danger"></i>
+                    </div>
+                    <div class="container text-center">
+                        <h4 class="text-danger">Change Setting Successfully</h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="logout-btn" type="button" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery-3.4.1.js}"></script>
+<script th:src="@{/vendor/bootstrap/bootstrap.js}"></script>
+<script th:src="@{/vendor/chartjs/chart.js}"></script>
+<script th:src="@{/vendor/font-awesome/js/fontawesome.js}"></script>
+<script th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/setting.js}"></script>
+</body>
+</html>

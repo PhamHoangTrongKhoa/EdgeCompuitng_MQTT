@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragment</title>
+    <link type="text/css" rel="stylesheet" href="../static/vendor/bootstrap/bootstrap.css" th:href="@{/vendor/bootstrap/bootstrap.css}">
+    <link type="text/css" rel="stylesheet" href="../static/css/main.css" th:href="@{/css/main.css}">
+</head>
+<body>
+<div th:fragment="sidebar">
+    <div class="mt-4">
+        <span th:hidden="true" th:text="${room.id}" th:id="house_id"></span>
+        <a th:href="@{/room/{id}(id=${room.id})}" class="sidebar-brand normal-text">
+            <i class="fa fa-cubes fa-4x"></i>
+            <span class="large-text ml-2">Room <span th:text="${room.name}"></span></span>
+        </a>
+    </div>
+    <br>
+    <div class="item-holder pb-0 border-bottom-0">
+        <div class="sidebar-item">
+            <a th:href="@{/room/{id}(id=${room.id})}" class="sidebar-text normal-text py-2">
+                <i class="fa fa-home large-text"></i>
+                <span class="ml-2">Dashboard</span>
+            </a>
+        </div>
+    </div>
+    <div class="item-holder">
+        <div class="sidebar-item">
+            <a th:href="@{/room/{id}/weather(id=${room.id})}" class="sidebar-text normal-text pt-2">
+                <i class="fa fa-globe large-text"></i>
+                <span class="ml-2">Weather</span>
+            </a>
+        </div>
+    </div>
+    <div class="item-holder">
+        <div class="sidebar-item">
+            <a th:href="@{/room/{id}/misc(id=${room.id})}" class="sidebar-text normal-text pt-2">
+                <i class="fa fa-upload large-text"></i>
+                <span class="ml-2">Miscellaneous</span>
+            </a>
+        </div>
+    </div>
+    <div class="item-holder">
+        <div class="sidebar-item">
+            <a th:href="@{/room/{id}/device(id=${room.id})}" class="sidebar-text normal-text pt-2">
+                <i class="far fa-lightbulb large-text"></i>
+                <span class="ml-2">Devices</span>
+            </a>
+        </div>
+    </div>
+    <div class="item-holder">
+        <div class="sidebar-item">
+            <a th:href="@{/room/{id}/report(id=${room.id})}" class="sidebar-text normal-text pt-2">
+                <i class="fa fa-info-circle large-text"></i>
+                <span class="ml-2">Report</span>
+            </a>
+        </div>
+    </div>
+    <div class="item-holder">
+        <div class="sidebar-item">
+            <a th:href="@{/room/{id}/setting(id=${room.id})}" class="sidebar-text normal-text pt-2">
+                <i class="fa fa-cog large-text"></i>
+                <span class="ml-2">Setting</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div th:fragment="topbar">
+    <div class="navbar navbar-expand navbar-dark shadow bg-white test">
+        <div class="w-haft">
+            <button class="btn" id="menu-collapse">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class='vr'></div>
+            <button class='btn' data-toggle='modal' data-target='#logout-modal'>
+                <i class='fa fa-sign-out-alt icon-black'></i>
+            </button>
+            <!--<div class='vr'></div>
+            <button class='btn' id='login-btn'>
+                <i class='fa fa-sign-in-alt icon-black'></i>
+            </button>-->
+        </div>
+        <div class="w-haft justify-content-end">
+            <h4 id="t_a" class="mx-2"></h4>
+            <div class='vr'></div>
+            <h4 id="t_h" class="mx-2"></h4>
+            <div class='vr'></div>
+            <h4 id="t_s" class="mx-2"></h4>
+            <div class='vr'></div>
+            <h4 id="t_l" class="mx-2"></h4>
+            <div class='vr'></div>
+        </div>
+        <!--<div class="w-haft justify-content-end">
+            <div class='dropdown dropleft'>
+                <button class='btn dropdown-toggle' type='button' id='languageBtn' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                    Language
+                </button>
+                <div class='dropdown-menu' aria-labelledby='language-dropdown'>
+                    <a class='dropdown-item' href='#' id='lang-en'><img th:src="@{/vendor/icon/flag/england.svg}" class='small-flag mr-3 mb-1' alt='en'></a>
+                    <a class='dropdown-item' href='#' id='lang-vn'><img th:src="@{/vendor/icon/flag/vietnam.svg}" class='small-flag mr-3 mb-1' alt='vn'></a>
+                    <a class='dropdown-item' href='#' id='lang-fr'><img th:src="@{/vendor/icon/flag/france.svg}" class='small-flag mr-3 mb-1' alt='fr'></a>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="logout-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Exit</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container text-center">
+                        <i class="fas fa-info-circle fa-8x icon-danger"></i>
+                    </div>
+                    <div class="container text-center">
+                        <h4 class="text-danger">Are you sure you want to go back to homepage?</h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="logout-btn">Confirm</button>
+                    <button class="btn btn-outline-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:fragment="footer">
+    <button id="topBtn" title="Go to top"><i class="fas fa-angle-double-up"></i></button>
+    <footer class="text-center">
+        <div class="row mt-2">
+            <div class="col-xl-4 col-lg-6 col-mb-6 col-sm-12">
+                <p class="text-primary">One</p>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-mb-6 col-sm-12">
+                <p class="text-primary">Two</p>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-mb-6 col-sm-12">
+                <p class="text-primary">Three</p>
+                <div class="container">
+                </div>
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-12">
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

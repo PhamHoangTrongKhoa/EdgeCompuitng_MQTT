@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooms</title>
+    <link th:href="@{/vendor/bootstrap/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+</head>
+<body class="bg-primary">
+<div class="limiter-2 bg-light shadow">
+    <div class="container text-center">
+        <i class="icon-success fa fa-home fa-4x"></i>
+        <h1 class="text-primary">Room List</h1>
+    </div>
+    <div class="row mt-4">
+        <th:block th:each="i:${#numbers.sequence(1, n)}">
+            <div class="col-6">
+                <div class="card shadow mt-3 mb-5">
+                    <div class="card-header text-center">
+                        <h4>Room <span th:text="${i}"></span></h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <a th:href="@{/room/{id}(id=${i})}" class="btn btn-primary stretched-link">View</a>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+
+</div>
+</body>
+</html>

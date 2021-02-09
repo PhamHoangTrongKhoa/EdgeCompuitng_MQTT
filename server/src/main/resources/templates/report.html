@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <link th:href="@{/vendor/bootstrap/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/datepicker/datepicker.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="content shadow ml-2">
+    <div class="row">
+        <div class="col-sm-12 col-mb-3 col-lg-3 col-xl-3 sidebar bg-info" id="sidebar">
+            <div th:include="fragment::sidebar"></div>
+        </div>
+        <div class="col-sm-12 col-mb-9 col-lg-9 col-xl-9 content" id="content">
+            <div th:include="fragment::topbar"></div>
+            <div class="main-content my-4 ml-4">
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <h4>Report</h4>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-success float-right" id="export-btn"><i class="fa fa-download"></i></button>
+                    </div>
+                </div>
+                <hr>
+                <div class="card shadow mt-3 mb-5">
+                    <a href="#filter-form" class="card-header collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample" tabindex="-1">
+                        <h4 class="text-info">Filter</h4>
+                    </a>
+                    <div class="collapse" id="filter-form">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="planned-from-date" class="text-danger">From</label>
+                                        <div id="planned-from-date" class="input-group date datepicker no-margin">
+                                            <input class="form-control" readonly="" type="text" id="startDate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="text-success" for="planned-to-date">To</label>
+                                        <div id="planned-to-date" class="input-group date datepicker no-margin">
+                                            <input class="form-control" readonly="" type="text" id="endDate">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-success float-right" id="filter">Filter</button>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="card shadow mt-3 mb-5">
+                    <div class="card-header row">
+                        <div class="col-6">
+                            <h4 class="text-dark">Basic Report</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="dataTables_wrapper">
+                            <table class="table table-bordered dataTable" id="basic_report" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead class="text-center">
+                                <tr role="row">
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 30%;">
+                                        <span>Name</span>
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 20%;">
+                                        <span>Value</span>
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 20%;">
+                                        <span>Time</span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-center" id="basic_table">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="card shadow mt-3 mb-5">
+                    <div class="card-header row">
+                        <div class="col-6">
+                            <h4 class="text-dark">Extra Report</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="dataTables_wrapper">
+                            <table class="table table-bordered dataTable" id="extra_report" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead class="text-center">
+                                <tr role="row">
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 50%;">
+                                        <span>Name</span>
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 25%;">
+                                        <span>N</span>
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 25%;">
+                                        <span>Ex.</span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-center" id="extra_data">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:include="fragment::footer"></div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="extra_modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Extra</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="dataTables_wrapper">
+                        <table class="table table-bordered dataTable" id="extra_table" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead class="text-center">
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 50%;">
+                                    <span>Data</span>
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 25%;">
+                                    <span>Time</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="text-center" id="extra_list">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-info" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery-3.4.1.js}"></script>
+<script th:src="@{/vendor/bootstrap/bootstrap.js}"></script>
+<script th:src="@{/vendor/chartjs/chart.js}"></script>
+<script th:src="@{/vendor/font-awesome/js/fontawesome.js}"></script>
+<script th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/vendor/datepicker/datepicker.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/report.js}"></script>
+</body>
+</html>

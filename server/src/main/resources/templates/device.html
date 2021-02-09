@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Device</title>
+    <link th:href="@{/vendor/bootstrap/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/datepicker/datepicker.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="content shadow ml-2">
+    <div class="row">
+        <div class="col-sm-12 col-mb-3 col-lg-3 col-xl-3 sidebar bg-info" id="sidebar">
+            <div th:include="fragment::sidebar"></div>
+        </div>
+        <div class="col-sm-12 col-mb-9 col-lg-9 col-xl-9 content" id="content">
+            <div th:include="fragment::topbar"></div>
+            <div class="main-content my-4 ml-4">
+                <div class="row">
+                    <th:block th:each = "device : ${dvs}">
+                        <div class="col-6">
+                            <div class="card shadow mt-3 mb-5">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-8 text-center">
+                                            <h4><span th:text="${device.device.name}"></span></h4>
+                                            <h4><span th:text="${device.room.id}" id="room_id" hidden></span></h4>
+                                        </div>
+                                        <div class="col-4 text-center">
+                                            <div th:unless="${device.device.name=='ALARM'}">
+                                                <label class="switch">
+                                                    <span th:text="${device.status}" th:id="status" hidden></span>
+                                                    <th:block th:if="${device.status}=='ON'">
+                                                        <input type="checkbox" class="device" th:id="${'device_'+device.nid}" checked>
+                                                    </th:block>
+                                                    <th:block th:if="${device.status}=='OFF'">
+                                                        <input type="checkbox" class="device" th:id="${'device_'+device.nid}">
+                                                    </th:block>
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </div>
+                                            <div th:if="${device.device.name=='ALARM'}">
+                                                <label class="switch">
+                                                    <span th:text="${device.status}" th:id="status" hidden></span>
+                                                    <th:block th:if="${device.status}=='ON'">
+                                                        <button class="form-control btn-success device" th:id="${'device_'+device.nid}">OFF</button>
+                                                    </th:block>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+            <div th:include="fragment::footer"></div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery-3.4.1.js}"></script>
+<script th:src="@{/vendor/bootstrap/bootstrap.js}"></script>
+<script th:src="@{/vendor/chartjs/chart.js}"></script>
+<script th:src="@{/vendor/font-awesome/js/fontawesome.js}"></script>
+<script th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/vendor/datepicker/datepicker.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/device.js}"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link th:href="@{/vendor/bootstrap/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="content shadow ml-2">
+    <div class="row">
+        <div class="col-sm-12 col-mb-3 col-lg-3 col-xl-3 sidebar bg-info" id="sidebar">
+            <div th:include="fragment::sidebar"></div>
+        </div>
+        <div class="col-sm-12 col-mb-9 col-lg-9 col-xl-9 content" id="content">
+            <div th:include="fragment::topbar"></div>
+            <div class="main-content my-4 ml-4">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card shadow bordered bg-danger">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <p class="text-dark">Temperature</p>
+                                        <h2 id="tv"></h2>
+                                    </div>
+                                    <div class="col-3 justify-content-end pt-3">
+                                        <i class="fas fa-temperature-high fa-4x icon-black"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card shadow bordered bg-info">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <p class="text-dark">Humidity</p>
+                                        <h2 id="hv"></h2>
+                                    </div>
+                                    <div class="col-3 justify-content-end pt-3">
+                                        <i class="fas fa-tint fa-4x icon-black"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <div class="card shadow bordered bg-warning">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <p class="text-dark">Light Intensity</p>
+                                        <h2 id="lv"></h2>
+                                    </div>
+                                    <div class="col-3 justify-content-end pt-3">
+                                        <i class="fas fa-sun fa-4x icon-black"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card shadow bordered bg-secondary">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <p class="text-dark">Smoke Density</p>
+                                        <h2 id="sv"></h2>
+                                    </div>
+                                    <div class="col-3 justify-content-end pt-3">
+                                        <i class="fas fa-smog fa-4x icon-black"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h4>Overview</h4>
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card shadow bordered">
+                            <div class="card-header text-center">
+                                <h4>Weather</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="overview1" height="300px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card shadow bordered">
+                            <div class="card-header text-center">
+                                <h4>Misc.</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="overview2" height="300px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:include="fragment::footer"></div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery-3.4.1.js}"></script>
+<script th:src="@{/vendor/bootstrap/bootstrap.js}"></script>
+<script th:src="@{/vendor/chartjs/chart.js}"></script>
+<script th:src="@{/vendor/font-awesome/js/fontawesome.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/overview.js}"></script>
+</body>
+</html>

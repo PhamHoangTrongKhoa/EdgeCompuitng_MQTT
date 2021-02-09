@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link th:href="@{/vendor/bootstrap/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/vendor/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+</head>
+<body class="bg-primary">
+<div class="limiter bg-light shadow">
+    <div class="container text-center">
+        <h1 class="text-font-1">Login</h1>
+    </div>
+    <div class="row mt-4">
+        <div class="col-4 pr-0">
+            <a class="btn btn-info round"><i class="fab fa-facebook icon-white"></i></a>
+        </div>
+        <div class="col-4 text-center pr-0">
+            <a class="btn btn-danger round"><i class="fab fa-google icon-white"></i></a>
+        </div>
+        <div class="col-4 text-right pr-0">
+            <a class="btn btn-info round"><i class="fab fa-twitter icon-white"></i></a>
+        </div>
+    </div>
+    <form class="form-group mt-3" th:action="@{/login}" method="post">
+        <label for="username">Email</label>
+        <input class="form-control" type="text" name="username" id="username">
+        <label for="password" class="mt-3">Password</label>
+        <input class="form-control" type="password" name="password" id="password">
+        <button class="btn btn-block btn-info mt-5" type="submit" id="login-btn">Sign In</button>
+        <a th:href="@{/reset-password}" class="d-block mt-3">Forget Password?</a>
+        <a th:href="@{/register}" class="d-block mt-3">Register Account</a>
+    </form>
+</div>
+</body>
+</html>
