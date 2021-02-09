@@ -103,14 +103,14 @@ module.exports = {
   },
 
 //////////////////////////////////////////////////////////////////////////////
-mySqliteRead_table_room_status_on_server(params, callback){
+mySqliteRead_table_room_status_on_server(callback){
   // let db = new sqlite3.Database('E:/SV5_HK1/EdgeComputing_HealthCare/EdgeCompuitng_MQTT/database', (err) => {
   let results=[];
   let db = new sqlite3.Database('C:/sqlite/gui/test', (err) => {
     if (err) {
       console.error(err.message);
     }
-    console.log('Connected to the test database.');
+    console.log('Connected to table_room_status_on_server.');
   });
 
   // var sql ='SELECT * FROM table_room_status_on_server WHERE room = ?'
@@ -128,7 +128,7 @@ mySqliteRead_table_room_status_on_server(params, callback){
     if (err) {
       console.error(err.message);
     }
-    console.log('Close the database connection.');
+    console.log('Close table_room_status_on_server.');
     callback(err, results);
   });
 },
@@ -146,7 +146,7 @@ mySqliteRead_table_room_status_on_server(params, callback){
       console.log('Connected to the test database.');
     });
 
-    var sql ='SELECT * FROM room_status WHERE room = ? ORDER BY TIME DESC LIMIT 8s'
+    var sql ='SELECT * FROM room_status WHERE room = ? ORDER BY TIME DESC LIMIT 8'
     // var params =['room01', 27, 60.2]
             db.each(sql, params, function (err, result) {// chay dong thoi voi (1)
                 if (err){

@@ -10,7 +10,7 @@ let settings = {
 
 let time = 0;
 
-let flag_checkdevice = True;
+let flag_checkdevice = true;
 let timeline_update = 0;
 let time_now = 0;
 let scheduled_deviceStatus = {
@@ -55,6 +55,7 @@ client.on('message', function(topic, message){
 
 
 setInterval( function(){
+    console.log("15s")
     ///////////////////////////////////////////////////////////////
     //
     // Check status all rooms in house
@@ -62,14 +63,17 @@ setInterval( function(){
     ///////////////////////////////////////////////////////////////
     let now = Date.now();
     let flag = {
-        flag1 : false,
-        flag2 : false,
         msg : [],
-        control_msg : []
+        control_msg : [],
+        flag1 : false,
+        flag2 : false
     };
     database.mySqliteRead_table_room_status_on_server(function(err, room_status_on_serer){
+        console.log("done reading room_status_on_serer");
         for (let i = 0; i < room_status_on_serer.length; i++){
-            database.mySqlite_room_status(room_status_on_serer[i].room, function(err, room_status){
+            console.log("mySqliteRead_RoomStatus");
+            database.mySqliteRead_RoomStatus(room_status_on_serer[i].room, function(err, room_status){
+                console.log("mySqliteRead_RoomStatus");
                 let nhiet_arr = []
                 for (let j = 0; j < room_status_on_serer[i].length; j++){
                     nhiet_arr.push(room_status_on_serer[i][j].nhiet);
