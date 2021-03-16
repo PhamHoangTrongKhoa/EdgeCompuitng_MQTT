@@ -1,6 +1,6 @@
 # EdgeCompuitng_MQTT
 ## Node
-- Nạp code trong thư mục Arduino lần lượt cho esp8266MCU của từng phòng.
+- Nạp code trong thư mục Things_nodes lần lượt cho esp8266MCU của từng phòng.
 ## Edge device 
 - Source code trong thư mục edge-device.
 - Cài Sqlite, cơ sở dữ liệu dùng Sqlite.
